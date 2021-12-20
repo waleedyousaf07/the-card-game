@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import {
   Container,
@@ -11,8 +11,13 @@ import CustomCard from '../../../common/CustomCard';
 import getCardText from './PlayerList.utils';
 import './PlayerList.scss';
 import CustomModal from '../../../common/CustomModal';
+import Sorter from '../../../common/sorter/Sorter.view';
+import sortByKey from '../../../core/utils';
 
 const PlayersList = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [sorter, setSorter] = useState('');
+
   const {
     data: players,
     isFetching,
@@ -42,7 +47,7 @@ const PlayersList = () => {
         <div id="player-list">
           <Container>
             <Row xs={3}>
-              {players?.map((player) => (
+              {sortByKey(players, 'realName', sorter)?.map((player) => (
                 <Col key={player.id} className="card-col">
                   <CustomModal
                     element={(handleShow) => (
@@ -70,6 +75,7 @@ const PlayersList = () => {
               ))}
             </Row>
           </Container>
+          <Sorter sorter={sorter} setSorter={setSorter} />
         </div>
       )
   );

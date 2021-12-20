@@ -25,7 +25,7 @@ const players = [
   },
   {
     id: '5',
-    realName: 'Enid Rose',
+    realName: 'Anid Rose',
     playerName: 'Coincurse The Ghoul',
     asset: 'Jewelevil Bronze Of Goddesses',
   },
