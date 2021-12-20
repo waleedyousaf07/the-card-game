@@ -2,7 +2,7 @@
 
 ## Introduction:
 
-A ReactJS biolerplate
+An MVP for a card game
 
 ## Stack (Tools and Technologies):
 
