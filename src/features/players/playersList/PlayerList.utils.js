@@ -1,11 +1,11 @@
 import React from 'react';
 
 const getCardText = (player) => (
-  <>
-    <b>Username: </b>{player.playerName}
+  <div className="card-text">
+    <b className="card-label">Username: </b>{player.playerName}
     <br />
-    <b>Asset: </b>{player.asset}
-  </>
+    <b className="card-label">Asset: </b>{player.asset}
+  </div>
 );
 
 export default getCardText;

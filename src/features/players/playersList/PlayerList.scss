@@ -2,6 +2,26 @@
   .card-col {
     margin-bottom: 8px;
   }
+
+  .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .card-label {
+    color: #323232ee;
+    font-weight: 600;
+  }
+
+  .card {
+    text-align: left;
+  }
+
+  .card:hover {
+    cursor: pointer;
+  }
 }
 
 #spinner-wrapper {

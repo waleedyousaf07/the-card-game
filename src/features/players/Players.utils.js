@@ -3,7 +3,7 @@ const players = [
     id: '1',
     realName: 'Brianna Forbes',
     playerName: 'Dreamlurk The Unstoppable',
-    asset: 'Foghammer Lead',
+    asset: 'Foghammer Lead Foghammer LeadFoghammer LeadFoghammer LeadFoghammer LeadFoghammer LeadFoghammer LeadFoghammer LeadFoghammer LeadFoghammer LeadFoghammer LeadFoghammer LeadFoghammer Lead',
   },
   {
     id: '2',
