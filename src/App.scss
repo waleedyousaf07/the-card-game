@@ -7,4 +7,8 @@
   left: 0;
   right: 0;
   color: $text-color;
+  padding: 16px;
+  text-align: center;
 }
+
+@import "~bootstrap/scss/bootstrap";
