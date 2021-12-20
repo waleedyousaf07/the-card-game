@@ -22,6 +22,14 @@
   .card:hover {
     cursor: pointer;
   }
+
+  .toast-wrapper {
+    display: flex;
+
+    .toast {
+      margin-left: auto;
+    }
+  }
 }
 
 #spinner-wrapper {

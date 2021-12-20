@@ -13,6 +13,7 @@ const CustomCard = (props) => {
     cardOnClick,
     hasOnSubmit,
     cardHeight,
+    isMutating,
   } = props;
 
   return (
@@ -23,7 +24,18 @@ const CustomCard = (props) => {
         <Card.Text>{cardText}</Card.Text>
         {
           hasOnSubmit
-          && <Button variant="primary" onClick={() => onSubmit()}>Submit</Button>
+          && (
+            <Button
+              variant="primary"
+              onClick={(e) => {
+                e.stopPropagation();
+                onSubmit();
+              }}
+              disabled={isMutating}
+            >
+              {isMutating ? 'Submitting...' : 'Submit'}
+            </Button>
+          )
         }
       </Card.Body>
     </Card>
@@ -37,6 +49,7 @@ CustomCard.defaultProps = {
   onSubmit: () => { },
   hasOnSubmit: true,
   cardHeight: '180px',
+  isMutating: false,
 };
 
 CustomCard.propTypes = {
@@ -48,6 +61,7 @@ CustomCard.propTypes = {
   cardOnClick: PropTypes.func,
   hasOnSubmit: PropTypes.bool,
   cardHeight: PropTypes.string,
+  isMutating: PropTypes.bool,
 };
 
 export default CustomCard;

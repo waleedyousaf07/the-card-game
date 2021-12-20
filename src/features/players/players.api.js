@@ -7,4 +7,10 @@ const getPlayers = async () => {
   return res;
 };
 
+export const postPlayer = async (handleClose, payload) => {
+  const res = await mockedApi(payload);
+  handleClose();
+  return res;
+};
+
 export default getPlayers;

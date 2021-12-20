@@ -7,6 +7,7 @@ const CustomModal = (props) => {
     element,
     modalBody,
     onOk,
+    isMutating,
   } = props;
   const [show, setShow] = useState(false);
 
@@ -15,7 +16,7 @@ const CustomModal = (props) => {
 
   return (
     <>
-      {element(handleShow)}
+      {element(handleShow, handleClose)}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -26,8 +27,12 @@ const CustomModal = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => onOk(handleClose)}>
-            Submit
+          <Button
+            variant="primary"
+            onClick={() => onOk(handleClose)}
+            disabled={isMutating}
+          >
+            {isMutating ? 'Submitting...' : 'Submit'}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -41,6 +46,7 @@ CustomModal.propTypes = {
   element: PropTypes.func.isRequired,
   modalBody: PropTypes.node.isRequired,
   onOk: PropTypes.func.isRequired,
+  isMutating: PropTypes.bool.isRequired,
 };
 
 export default CustomModal;

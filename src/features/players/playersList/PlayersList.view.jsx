@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import {
   Container,
   Row,
   Col,
   Spinner,
 } from 'react-bootstrap';
-import getPlayers from '../players.api';
+import getPlayers, { postPlayer } from '../players.api';
 import CustomCard from '../../../common/CustomCard';
 import getCardText from './PlayerList.utils';
-import './PlayerList.scss';
 import CustomModal from '../../../common/CustomModal';
 import Sorter from '../../../common/sorter/Sorter.view';
+import useCustomToast from '../../../common/CustomToast';
 import sortByKey from '../../../core/utils';
+import './PlayerList.scss';
 
 const PlayersList = () => {
   // eslint-disable-next-line no-unused-vars
   const [sorter, setSorter] = useState('');
+  const [mutatingPlayer, setMutatingPlayer] = useState('');
 
   const {
     data: players,
@@ -27,9 +29,19 @@ const PlayersList = () => {
     onError: () => alert('Something went wrong'),
   });
 
-  const postData = (handleClose) => {
-    console.log('aaa post');
-    handleClose();
+  const { mutate: addPlayer } = useMutation(postPlayer, {
+    onSuccess: () => {
+      setShowToast(true);
+      setMutatingPlayer('');
+    },
+    onError: () => setMutatingPlayer(''),
+  });
+
+  const { toast, setShowToast } = useCustomToast();
+
+  const postData = (handleClose, player) => {
+    setMutatingPlayer(player.id);
+    addPlayer(handleClose, player);
   };
 
   return (
@@ -50,18 +62,21 @@ const PlayersList = () => {
               {sortByKey(players, 'realName', sorter)?.map((player) => (
                 <Col key={player.id} className="card-col">
                   <CustomModal
-                    element={(handleShow) => (
+                    element={(handleShow, handleClose) => (
                       <CustomCard
                         cardTitle={player.realName}
                         cardText={getCardText(player)}
                         cardOnClick={handleShow}
-                        onSubmit={postData}
+                        onSubmit={() => postData(handleClose, player)}
                         cardHeight="180px"
                         hasOnSubmit
                         customCardClass="card"
+                        isMutating={mutatingPlayer === player.id}
                       />
                     )}
-                    onOk={(handleClose) => postData(handleClose)}
+                    onOk={(handleClose) => {
+                      postData(handleClose, player);
+                    }}
                     modalBody={(
                       <CustomCard
                         cardTitle={player.realName}
@@ -70,12 +85,14 @@ const PlayersList = () => {
                         cardHeight="auto"
                       />
                     )}
+                    isMutating={mutatingPlayer === player.id}
                   />
                 </Col>
               ))}
             </Row>
           </Container>
           <Sorter sorter={sorter} setSorter={setSorter} />
+          <div className="toast-wrapper">{toast}</div>
         </div>
       )
   );
