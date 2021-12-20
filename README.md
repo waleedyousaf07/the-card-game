@@ -12,8 +12,10 @@ An MVP for a card game
   - <b>HTML</b> - Structuring the webpages
   - <b>CSS</b> - Styling the webpages
   - <b>SAAS (SCSS)</b> - Preprocessor for CSS
+  - <b>React Bootstrap</b> - Components Library
   - <b>Redux Toolkit</b> - State management
   - <b>React Query</b> - Server query/state
+  - <b>Prop Types</b> - Static prop type checking
   - <b>React Testing Library</b> - Test cases
   - <b>ESLint</b> - Linter
   - <b>Husky</b> - Pre commit hooks
@@ -162,3 +164,11 @@ Now wrap app into `QueryClientProvider` and provide `client`
 Add react router dom for routing
 
     npm install react-router-dom
+
+## APP Structure
+
+The app follows a modular structure where all the features (including their APIs, actions, reducers, views, containers etc) goes into the `src/features` folder
+
+There is a `src/common` folder for the components which can be reused accross multiple features like the `modals`, `toasts` etc.
+
+All the core utilities of the app goes to the `src/core` folder
